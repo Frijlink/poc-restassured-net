@@ -1,3 +1,4 @@
+using FluentAssertions;
 using static Settings.Configuration;
 
 namespace Tests;
@@ -19,6 +20,9 @@ public class MembersTests
             .When()
             .Get($"{baseUrl}/1/members/me/boards?key=[key]&token=[token]")
             .Then()
-            .StatusCode(200);
+            .StatusCode(200)
+            .Extract().Body()
+            .Should()
+            .Be("[]");
     }
 }
