@@ -7,23 +7,16 @@ namespace Tests;
 [TestFixture]
 public class BoardsTests
 {
-    private string baseUrl = string.Empty;
-    private string token = string.Empty;
-    private string key = string.Empty;
     private string boardId = string.Empty;
     private string organizationId = string.Empty;
 
     [SetUp]
     public void Init()
     {
-        baseUrl = GetEnvironmentVariable("TRELLO_API_URL");
-        token = GetEnvironmentVariable("TRELLO_API_TOKEN");
-        key = GetEnvironmentVariable("TRELLO_API_KEY");
-
-        var memberId = TokenApi.GetMemberId(key, token);
+        var memberId = TokenApi.GetMemberId(Key, Token);
         memberId.Should().NotBeNull();
 
-        var memberOrgs = MembersApi.GetMemberOrganizations(memberId, key, token);
+        var memberOrgs = MembersApi.GetMemberOrganizations(memberId, Key, Token);
         memberOrgs[0].MemberId.Should().Be(memberId);
         memberOrgs[0].OrganizationId.Should().NotBeNullOrEmpty();
         organizationId = memberOrgs[0].OrganizationId;
@@ -32,11 +25,11 @@ public class BoardsTests
     [TearDown]
     public void DeleteAllBoards()
     {
-        var boards = MembersApi.GetBoards(key, token);
+        var boards = MembersApi.GetBoards(Key, Token);
 
         foreach (var board in boards)
         {
-            BoardsApi.DeleteBoard(board.BoardId, key, token);
+            BoardsApi.DeleteBoard(board.BoardId, Key, Token);
         }
     }
 
@@ -54,7 +47,7 @@ public class BoardsTests
         };
 
         // Create Board
-        var responseCreate = BoardsApi.CreateBoard(key, token, newBoard["name"], newBoard["colour"], newBoard["permissionLevel"]);
+        var responseCreate = BoardsApi.CreateBoard(Key, Token, newBoard["name"], newBoard["colour"], newBoard["permissionLevel"]);
         responseCreate.BoardId.Should().NotBeNullOrEmpty();
         responseCreate.OrganizationId.Should().Be(organizationId);
         responseCreate.Name.Should().Be(newBoard["name"]);
@@ -64,7 +57,7 @@ public class BoardsTests
         boardId = responseCreate.BoardId;
 
         // Read Board
-        var responseGet = BoardsApi.GetBoard(boardId, key, token);
+        var responseGet = BoardsApi.GetBoard(boardId, Key, Token);
         responseGet.BoardId.Should().Be(boardId);
         responseGet.OrganizationId.Should().Be(organizationId);
         responseGet.Name.Should().Be(newBoard["name"]);
@@ -73,7 +66,7 @@ public class BoardsTests
         responseGet.Preferences.PermissionLevel.Should().Be(newBoard["permissionLevel"]);
 
         // Update Board
-        var responseUpdate = BoardsApi.UpdateBoard(boardId, key, token, newBoard["updatedName"], newBoard["updatedcolour"], newBoard["updatedpermissionLevel"]);
+        var responseUpdate = BoardsApi.UpdateBoard(boardId, Key, Token, newBoard["updatedName"], newBoard["updatedcolour"], newBoard["updatedpermissionLevel"]);
         responseUpdate.BoardId.Should().Be(boardId);
         responseUpdate.OrganizationId.Should().Be(organizationId);
         responseUpdate.Name.Should().Be(newBoard["updatedName"]);
@@ -82,11 +75,11 @@ public class BoardsTests
         responseUpdate.Preferences.PermissionLevel.Should().Be(newBoard["updatedpermissionLevel"]);
 
         // Close Board
-        var responseClose = BoardsApi.CloseBoard(boardId, key, token);
+        var responseClose = BoardsApi.CloseBoard(boardId, Key, Token);
         responseClose.BoardId.Should().Be(boardId);
         responseClose.Closed.Should().BeTrue();
 
         // Delete Board
-        BoardsApi.DeleteBoard(boardId, key, token);
+        BoardsApi.DeleteBoard(boardId, Key, Token);
     }
 }

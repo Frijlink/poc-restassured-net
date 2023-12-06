@@ -8,13 +8,10 @@ namespace Tests;
 [TestFixture]
 public class MembersTests
 {
-    [Test, Category("@2")]
+    [Test, Category("API")]
     public void RetrieveAmountOfBoardsFromMember()
     {
-        var key = GetEnvironmentVariable("TRELLO_API_KEY");
-        var token = GetEnvironmentVariable("TRELLO_API_TOKEN");
-
-        var boards = MembersApi.GetBoards(key, token);
+        var boards = MembersApi.GetBoards(Key, Token);
 
         boards.Should().BeEquivalentTo(new List<BoardsResponse> {});
     }

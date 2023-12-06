@@ -8,7 +8,7 @@ public class TokenApi
             .PathParam("key", key)
             .PathParam("token", token)
             .When()
-            .Get($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/tokens/[token]?key=[key]&token=[token]")
+            .Get($"{BaseUrl}/1/tokens/[token]?key=[key]&token=[token]")
             .Then()
             .StatusCode(200)
             .Extract().Body("$.idMember");

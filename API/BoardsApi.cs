@@ -23,7 +23,7 @@ public class BoardsApi
         return (CreateBoardResponse)Given()
             .Body(data)
             .When()
-            .Post($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/boards")
+            .Post($"{BaseUrl}/1/boards")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(CreateBoardResponse));
@@ -41,7 +41,7 @@ public class BoardsApi
         return (CreateBoardResponse)Given()
             .PathParams(pathParams)
             .When()
-            .Get($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/boards/[boardId]?key=[key]&token=[token]")
+            .Get($"{BaseUrl}/1/boards/[boardId]?key=[key]&token=[token]")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(CreateBoardResponse));
@@ -67,7 +67,7 @@ public class BoardsApi
         return (CreateBoardResponse)Given()
             .Body(data)
             .When()
-            .Put($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/boards/{boardId}")
+            .Put($"{BaseUrl}/1/boards/{boardId}")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(CreateBoardResponse));
@@ -88,7 +88,7 @@ public class BoardsApi
         return (CreateBoardResponse)Given()
             .Body(data)
             .When()
-            .Put($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/boards/{boardId}")
+            .Put($"{BaseUrl}/1/boards/{boardId}")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(CreateBoardResponse));
@@ -106,7 +106,7 @@ public class BoardsApi
         Given()
             .PathParams(pathParams)
             .When()
-            .Delete($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/boards/[boardId]?key=[key]&token=[token]")
+            .Delete($"{BaseUrl}/1/boards/[boardId]?key=[key]&token=[token]")
             .Then()
             .StatusCode(200);
     }

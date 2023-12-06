@@ -10,7 +10,7 @@ public class MembersApi
             .PathParam("key", key)
             .PathParam("token", token)
             .When()
-            .Get($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/members/me/boards?key=[key]&token=[token]")
+            .Get($"{BaseUrl}/1/members/me/boards?key=[key]&token=[token]")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(List<BoardsResponse>));
@@ -28,7 +28,7 @@ public class MembersApi
         return (List<MemberOrgResponse>)Given()
             .PathParams(pathParams)
             .When()
-            .Get($"{GetEnvironmentVariable("TRELLO_API_URL")}/1/members/[memberId]/organizations?key=[key]&token=[token]")
+            .Get($"{BaseUrl}/1/members/[memberId]/organizations?key=[key]&token=[token]")
             .Then()
             .StatusCode(200)
             .DeserializeTo(typeof(List<MemberOrgResponse>));
