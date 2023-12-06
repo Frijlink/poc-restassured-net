@@ -1,6 +1,6 @@
+using API;
 using Contracts;
 using FluentAssertions;
-using static Settings.Configuration;
 
 namespace Tests;
 
@@ -11,18 +11,10 @@ public class MembersTests
     [Test, Category("@2")]
     public void RetrieveAmountOfBoardsFromMember()
     {
-        var baseUrl = GetEnvironmentVariable("TRELLO_API_URL");
         var key = GetEnvironmentVariable("TRELLO_API_KEY");
         var token = GetEnvironmentVariable("TRELLO_API_TOKEN");
 
-        var boards = Given()
-            .PathParam("key", key)
-            .PathParam("token", token)
-            .When()
-            .Get($"{baseUrl}/1/members/me/boards?key=[key]&token=[token]")
-            .Then()
-            .StatusCode(200)
-            .DeserializeTo(typeof(List<BoardsResponse>));
+        var boards = MembersApi.GetBoards(key, token);
 
         boards.Should().BeEquivalentTo(new List<BoardsResponse> {});
     }
