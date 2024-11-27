@@ -1,7 +1,8 @@
-using API;
+using PocRestAssuredNet.API;
 using FluentAssertions;
+using PocRestAssuredNet.Utilities;
 
-namespace Tests;
+namespace PocRestAssuredNet.Tests;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]

@@ -1,4 +1,4 @@
-namespace API;
+namespace PocRestAssuredNet.API;
 
 public class TokenApi
 {

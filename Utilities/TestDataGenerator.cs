@@ -1,3 +1,5 @@
+namespace PocRestAssuredNet.Utilities;
+
 public static class TestDataGenerator
 {
     public static string GenerateBoardName()

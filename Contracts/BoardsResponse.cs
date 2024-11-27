@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Contracts;
+namespace PocRestAssuredNet.Contracts;
 
 public class BoardsResponse
 {
