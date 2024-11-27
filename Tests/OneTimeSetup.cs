@@ -1,4 +1,4 @@
-namespace Tests;
+namespace PocRestAssuredNet.Tests;
 
 [SetUpFixture]
 public class OneTimeSetup

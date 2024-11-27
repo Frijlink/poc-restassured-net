@@ -1,6 +1,7 @@
-using Contracts;
 
-namespace API;
+using PocRestAssuredNet.Contracts;
+
+namespace PocRestAssuredNet.API;
 
 public class MembersApi
 {

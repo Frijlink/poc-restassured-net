@@ -1,6 +1,6 @@
-using Contracts;
+using PocRestAssuredNet.Contracts;
 
-namespace API;
+namespace PocRestAssuredNet.API;
 
 public class BoardsApi
 {
